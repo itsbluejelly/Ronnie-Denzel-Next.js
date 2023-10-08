@@ -1,3 +1,3 @@
 export default function TicketsPage(){
-    return <main>Tickets Page</main>
+    return <h2>Tickets Page</h2>
 }
