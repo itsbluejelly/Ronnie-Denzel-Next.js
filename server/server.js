@@ -2,14 +2,18 @@
     // IMPORTING NECESSARY MODULES
 const express = require('express')
 const dotenv = require('dotenv')
+const mongoose = require('mongoose')
     // IMPORTING NECESSARY MIDDLEWARES
 const eventLogger = require('./middlewares/eventLogger')
+    // IMPORTING NECESSARY CONFIG FILES
+const connectDB = require('./config/connectDB')
 
 // INITIALIZING APP FROM EXPRESS
 const app = express()
 
 // NON-ROUTE MIDDLEWARS
 dotenv.config()
+connectDB()
 
 // ROUTE MIDDLEWARES
 app.get('/', (req, res, next) => {
@@ -20,6 +24,8 @@ app.get('/', (req, res, next) => {
 // ACTIVATING SERVER
 const port = process.env.PORT_NUMBER || 4000
 
-app.listen(port, () => {
-    eventLogger("Server instantiated successfully", `Running on port: ${port}`, "databaseLogs.txt")
+mongoose.connection.once('open', () => {
+    app.listen(port, () => {
+        eventLogger("Connection to database successful", `Server running on port: ${port}`, 'databaseLogs.txt')
+    })
 })
