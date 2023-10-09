@@ -9,6 +9,7 @@ const eventLogger = require('./middlewares/eventLogger')
 const connectDB = require('./config/connectDB')
     // IMPORTING NECESSARY ROUTERS
 const rootRouter = require('./routers/rootRouter')
+const okRouter = require('./routers/okRouter')
 
 // INITIALIZING APP FROM EXPRESS
 const app = express()
@@ -19,7 +20,8 @@ connectDB()
 app.use(express.json())
 
 // ROUTE MIDDLEWARES
-app.get('/', rootRouter)
+app.use('/', rootRouter)
+app.use('/ok', okRouter)
 
 // ACTIVATING SERVER
 const port = process.env.PORT_NUMBER || 4000
