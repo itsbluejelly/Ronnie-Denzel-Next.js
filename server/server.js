@@ -7,6 +7,8 @@ const mongoose = require('mongoose')
 const eventLogger = require('./middlewares/eventLogger')
     // IMPORTING NECESSARY CONFIG FILES
 const connectDB = require('./config/connectDB')
+    // IMPORTING NECESSARY ROUTERS
+const rootRouter = require('./routers/rootRouter')
 
 // INITIALIZING APP FROM EXPRESS
 const app = express()
@@ -14,12 +16,10 @@ const app = express()
 // NON-ROUTE MIDDLEWARS
 dotenv.config()
 connectDB()
+app.use(express.json())
 
 // ROUTE MIDDLEWARES
-app.get('/', (req, res, next) => {
-    res.send("Hello World")
-    next()
-})
+app.get('/', rootRouter)
 
 // ACTIVATING SERVER
 const port = process.env.PORT_NUMBER || 4000
