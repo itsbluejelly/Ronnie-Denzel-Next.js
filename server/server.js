@@ -10,6 +10,7 @@ const connectDB = require('./config/connectDB')
     // IMPORTING NECESSARY ROUTERS
 const rootRouter = require('./routers/rootRouter')
 const okRouter = require('./routers/okRouter')
+const ticketsRouter = require('./routers/ticketsRouter')
 
 // INITIALIZING APP FROM EXPRESS
 const app = express()
@@ -22,6 +23,7 @@ app.use(express.json())
 // ROUTE MIDDLEWARES
 app.use('/', rootRouter)
 app.use('/ok', okRouter)
+app.use('/tickets', ticketsRouter)
 
 // ACTIVATING SERVER
 const port = process.env.PORT_NUMBER || 4000
