@@ -15,9 +15,9 @@ const TicketSchema = new Schema({
     body: { type: String },
     
     priority: {
-        type: String,
+        type: Number,
         required: [true, "Your ticket must have a level of priority"],
-        default: "low"
+        default: 3
     },
 
     email: {
