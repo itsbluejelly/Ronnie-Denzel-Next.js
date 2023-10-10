@@ -17,7 +17,8 @@ const TicketSchema = new Schema({
     priority: {
         type: Number,
         required: [true, "Your ticket must have a level of priority"],
-        default: 3
+        default: 3,
+        maxLength: [1, "Priority level should be one digit only"]
     },
 
     email: {

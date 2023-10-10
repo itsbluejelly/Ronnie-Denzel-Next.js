@@ -37,10 +37,12 @@ async function getController(req, res, next){
 // A POSTCONTROLLER FUNCTION THAT HANDLES POST REQUESTS
 async function postController(req, res, next){
     try{
-        const {email} = req.body
+        const {email, priority} = req.body
 
         if(!validator.isEmail(email)){
             throw new Error("Invalid email")
+        }else if(priority > 3 || priority < 1){
+            throw new Error("Invalid priority level")
         }
 
         const createdTicket = await TicketModel.create(req.body)
